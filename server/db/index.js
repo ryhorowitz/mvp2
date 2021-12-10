@@ -8,7 +8,6 @@ let db = new sqlite3.Database('./mvp2.db', (err) => {
   console.log('Connected to the mvp2.db SQlite database.');
 });
 
-
 // close the database connection
 db.close((err) => {
   if (err) {
