@@ -11,6 +11,7 @@ class App extends React.Component {
       <div>
         THANKS RONA! FROM REACT
       </div>
+
     )
   }
 }
