@@ -1,19 +1,15 @@
 import React from 'react';
+import {Signup} from './signup.jsx';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
+function App() {
 
-  render() {
-    return(
-      <div>
-        THANKS RONA! FROM REACT
-      </div>
+  return (
+    <div>
+      THANKS RONA! FROM REACT
+      <Signup />
+    </div>
 
-    )
-  }
+  )
 }
 
-export default App;
+export { App }
