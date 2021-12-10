@@ -16,18 +16,24 @@ function Signup() {
     setUser(user => ({ ...user, [name]: value }));
   }
 
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log('button cicked')
     if (user.firstName && user.lastName && user.email && user.username &&
-       (user.password === user.confirmPassword)) {
+      (user.password === user.confirmPassword)) {
     //add to DB
     //post req state
-    React.useEffect(() => {
-      axios.get()
-    })
+      axios.post('/signup', {...user})
+        .then((res) => {
+          console.log('axios post success', res);
+        })
+        .catch((err) => {
+          console.error('ERROR', err)
+        })
     }
   }
+
 
   return (
     <div>
