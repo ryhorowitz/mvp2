@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 function Signup() {
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     username: '',
     password: '',
@@ -20,7 +20,7 @@ function Signup() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log('button cicked')
-    if (user.firstName && user.lastName && user.email && user.username &&
+    if (user.firstname && user.lastname && user.email && user.username &&
       (user.password === user.confirmPassword)) {
     //add to DB
     //post req state
@@ -28,9 +28,18 @@ function Signup() {
         .then((res) => {
           console.log('axios post success', res);
         })
+
         .catch((err) => {
           console.error('ERROR', err)
         })
+      setUser({
+        firstname: '',
+        lastname: '',
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: ''
+      })
     }
   }
 
@@ -41,11 +50,11 @@ function Signup() {
       <form name="signup" onSubmit={handleSubmit}>
         <div>
           <label>First Name</label>
-          <input type ="text" name="firstName" value={user.firstName} onChange={handleChange}/>
+          <input type ="text" name="firstname" value={user.firstname} onChange={handleChange}/>
         </div>
         <div>
           <label>Last Name</label>
-          <input type ="text" name="lastName" value={user.lastName} onChange={handleChange}/>
+          <input type ="text" name="lastname" value={user.lastname} onChange={handleChange}/>
         </div>
         <div>
         <label>Email</label>
@@ -57,11 +66,11 @@ function Signup() {
         </div>
         <div>
           <label>Password</label>
-          <input type ="text" name="password" value={user.password} onChange={handleChange}/>
+          <input type ="password" name="password" value={user.password} onChange={handleChange}/>
         </div>
         <div>
           <label>Confirm Password</label>
-          <input type ="text" name="confirmPassword" value={user.confirmPassword} onChange={handleChange}/>
+          <input type ="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange}/>
         </div>
         <div>
           <button>Register</button>
