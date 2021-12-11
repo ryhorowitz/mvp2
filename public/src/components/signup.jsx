@@ -6,24 +6,29 @@ function Signup() {
     firstname: '',
     lastname: '',
     email: '',
-    username: '',
-    password: '',
-    confirmPassword: ''
   });
+  const [signed, setSigned] = useState(false)
+
+  function handleSuccess() {
+    setSigned(!signed);
+    axios.get('/welcome')
+      .then((res) => {
+        console.log('axios GET success', res);
+      })
+      .catch((err) => {
+        console.error('ERROR', err)
+      })
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
     setUser(user => ({ ...user, [name]: value }));
   }
 
-
   function handleSubmit(e) {
     e.preventDefault();
     console.log('button cicked')
-    if (user.firstname && user.lastname && user.email && user.username &&
-      (user.password === user.confirmPassword)) {
-    //add to DB
-    //post req state
+    if (user.firstname && user.lastname && user.email) {
       axios.post('/signup', {...user})
         .then((res) => {
           console.log('axios post success', res);
@@ -32,14 +37,12 @@ function Signup() {
         .catch((err) => {
           console.error('ERROR', err)
         })
+      handleSuccess();
       setUser({
         firstname: '',
         lastname: '',
         email: '',
-        username: '',
-        password: '',
-        confirmPassword: ''
-      })
+      });
     }
   }
 
@@ -61,21 +64,23 @@ function Signup() {
           <input type ="text" name="email" value={user.email} onChange={handleChange}/>
         </div>
         <div>
-          <label>Username</label>
-          <input type ="text" name="username" value={user.username} onChange={handleChange}/>
-        </div>
-        <div>
-          <label>Password</label>
-          <input type ="password" name="password" value={user.password} onChange={handleChange}/>
-        </div>
-        <div>
-          <label>Confirm Password</label>
-          <input type ="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange}/>
-        </div>
-        <div>
           <button>Register</button>
         </div>
       </form>
+      <div>
+        {signed &&
+          <div>
+            <h2>
+              Thank you for joining the listserv!
+            </h2>
+{/*
+            <video controls="" autoPlay="" name="media">
+              <source src="https://www.lsu.edu/hss/french/files/French%20cajun%20french%202/item49679.wav"
+                  type="audio/x-wav"/>
+            </video> */}
+          </div>
+          }
+      </div>
     </div>
   );
 }
